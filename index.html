@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>CS Portal</title>
+
+  <style>
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background: linear-gradient(135deg, #0a0f2c, #1a1f4a);
+      color: white;
+    }
+
+    .header {
+      text-align: center;
+      padding: 30px 20px;
+    }
+
+    .header h1 {
+      font-size: 28px;
+      margin: 10px 0;
+    }
+
+    .search {
+      padding: 10px;
+    }
+
+    .search input {
+      width: 100%;
+      padding: 12px;
+      border-radius: 10px;
+      border: none;
+      outline: none;
+    }
+
+    .dashboard {
+      display: flex;
+      gap: 10px;
+      padding: 10px;
+      flex-wrap: wrap;
+    }
+
+    .card {
+      flex: 1;
+      background: #2a2f6c;
+      padding: 15px;
+      border-radius: 10px;
+      text-align: center;
+      min-width: 120px;
+    }
+
+    .quick {
+      padding: 10px;
+    }
+
+    .box {
+      background: #4a54d1;
+      padding: 15px;
+      margin-bottom: 10px;
+      border-radius: 12px;
+      cursor: pointer;
+      transition: 0.3s;
+    }
+
+    .box:hover {
+      transform: scale(1.03);
+    }
+
+    .courses {
+      padding: 10px;
+    }
+
+    .course-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 10px;
+    }
+
+    .course {
+      background: #1f9d7a;
+      padding: 20px;
+      border-radius: 12px;
+      text-align: center;
+      transition: 0.3s;
+    }
+
+    .course:hover {
+      transform: scale(1.05);
+    }
+
+    .notice {
+      padding: 10px;
+    }
+
+    .notice-card {
+      background: #2f2f5a;
+      padding: 15px;
+      margin-bottom: 10px;
+      border-radius: 10px;
+    }
+
+    .reps {
+      padding: 10px;
+    }
+
+    .rep-card {
+      background: #444;
+      padding: 15px;
+      margin-bottom: 10px;
+      border-radius: 10px;
+    }
+
+    .rep-card a {
+      color: #00ffcc;
+      text-decoration: none;
+    }
+  </style>
+
+</head>
+
+<body>
+
+  <!-- HEADER -->
+  <header class="header">
+    <h3>CS PORTAL</h3>
+    <h1>Computer Science Department</h1>
+    <p>"Stay consistent, success is yours."</p>
+  </header>
+
+  <!-- SEARCH -->
+  <div class="search">
+    <input type="text" placeholder="Search resources, courses...">
+  </div>
+
+</div>
+  <!-- DASHBOARD -->
+  <section class="dashboard">
+    <div class="card">Attendance: 80%</div>
+    <div class="card">Next Class: CSC102 (10AM)</div>
+    <div class="card">Pending Quiz: 1</div>
+  </section>
+
+  <!-- QUICK ACCESS -->
+  <section class="quick">
+    <div class="box">Weekly Timetable</div>
+    <div class="box">Learning Resources</div>
+    <div class="box">Past Questions</div>
+    <div class="box">Practice Quiz</div>
+  </section>
+
+  <!-- COURSES -->
+  <section class="courses">
+    <h2>Your Courses</h2>
+    <div class="course-grid">
+      <div class="course">CSC102</div>
+      <div class="course">CSC104</div>
+      <div class="course">CSC106</div>
+      <div class="course">MTH102</div>
+      <div class="course">PHY102</div>
+    </div>
+  </section>
+
+  <!-- NOTICE BOARD -->
+  <section class="notice">
+    <h2>Notice Board</h2>
+
+    <div class="notice-card">
+      <h4>CSC102 Class Update</h4>
+      <p>10:00 AM – 12:00 PM | LR G</p>
+    </div>
+
+    <div class="notice-card">
+      <h4>PHY102 Group A</h4>
+      <p>2:00 PM – 4:00 PM | Admin Auditorium</p>
+    </div>
+
+
+  <!-- REPS -->
+  <section class="reps">
+    <h2>Class Representatives</h2>
+
+    <div class="rep-card">
+      <p><strong>Abdulrahman Hamzat Amura</strong></p>
+      <p>Course Rep</p>
+      <a href="tel:08029255203">Call</a>
+    </div>
+
+    <div class="rep-card">
+      <p><strong>Usman Haliyah Yetunde</strong></p>
+      <p>Assistant Rep</p>
+      <a href="tel:09066035648">Call</a>
+    </div>
+
+  </section>
+<script>
+    let files = JSON.parse(localStorage.getItem("files")) || [];
+    let quizzes = JSON.parse(localStorage.getItem("quizzes")) || [];
+    
+    function displayFiles() {
+        let container = document.getElementById("fileList");
+        container.innerHTML = "";
+        
+        files.forEach(file => {
+            container.innerHTML += `
+      <div class="card">
+        <a href="${file.link}" target="_blank">${file.name}</a>
+      </div>
+    `;
+        });
+    }
+    
+    function displayQuiz() {
+        let container = document.getElementById("quizList");
+        container.innerHTML = "";
+        
+        quizzes.forEach((quiz, index) => {
+            container.innerHTML += `
+      <div class="card">
+        <p>${quiz.q}</p>
+        <button onclick="alert('Answer: ${quiz.a}')">Show Answer</button>
+      </div>
+    `;
+        });
+    }
+
+    displayFiles();
+    displayQuiz();
+    <link rel="stylesheet" href="style.css">
+<script src="script.js"></script>
+</script>
+</body>
+</html>

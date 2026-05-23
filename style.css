@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>CS Portal</title>
+
+<style>
+body {
+  margin: 0;
+  font-family: Arial;
+  background: linear-gradient(135deg,#0a0f2c,#1a1f4a);
+  color: white;
+}
+
+.header { text-align:center; padding:20px; }
+
+button {
+  padding:10px;
+  border:none;
+  border-radius:8px;
+  background:#4a54d1;
+  color:white;
+  cursor:pointer;
+}
+
+input {
+  padding:10px;
+  margin:5px;
+  border-radius:8px;
+  border:none;
+}
+
+.section { padding:15px; }
+
+.card {
+  background:#2a2f6c;
+  padding:10px;
+  margin:10px 0;
+  border-radius:10px;
+}
+
+</style>
+</head>
+
+<body>
+
+<div class="header">
+  <h1>CS Portal (Admin)</h1>
+</div>
+
+<div class="section">
+  <h2>Add Learning Material</h2>
+  <input id="fileName" placeholder="Enter file name">
+  <input id="fileLink" placeholder="Paste file link (PDF/Drive)">
+  <button onclick="addFile()">Add File</button>
+
+  <div id="fileList"></div>
+</div>
+
+<div class="section">
+  <h2>Create Practice Quiz</h2>
+  <input id="question" placeholder="Enter question">
+  <input id="answer" placeholder="Correct answer">
+  <button onclick="addQuiz()">Add Quiz</button>
+
+  <div id="quizList"></div>
+</div>
+
+<script>
+
+// STORAGE
+let files = JSON.parse(localStorage.getItem("files")) || [];
+let quizzes = JSON.parse(localStorage.getItem("quizzes")) || [];
+
+// ADD FILE
+function addFile() {
+  let name = document.getElementById("fileName").value;
+  let link = document.getElementById("fileLink").value;
+
+  if(name && link){
+    files.push({name, link});
+    localStorage.setItem("files", JSON.stringify(files));
+    displayFiles();
+  }
+}
+
+// DISPLAY FILES
+function displayFiles() {
+  let container = document.getElementById("fileList");
+  container.innerHTML = "";
+
+  files.forEach(file => {
+    container.innerHTML += `
+      <div class="card">
+        <a href="${file.link}" target="_blank">${file.name}</a>
+      </div>
+    `;
+  });
+}
+
+// ADD QUIZ
+function addQuiz() {
+  let q = document.getElementById("question").value;
+  let a = document.getElementById("answer").value;
+
+  if(q && a){
+    quizzes.push({q,a});:
+    localStorage.setItem("quizzes", JSON.stringify(quizzes));
+    displayQuiz();
+  }
+}
+
+// DISPLAY QUIZ
+function displayQuiz() {
+  let container = document.getElementById("quizList");
+  container.innerHTML = "";
+
+  quizzes.forEach((quiz, index) => {
+    container.innerHTML += `
+      <div class="card">
+        <p>${quiz.q}</p>
+        <button onclick="checkAnswer(${index})">Show Answer</button>
+      </div>
+    `;
+  });
+}
+
+// CHECK ANSWER
+function checkAnswer(i){
+  alert("Answer: " + quizzes[i].a);
+}
+
+// LOAD DATA
+displayFiles();
+displayQuiz();
+
+</script>
+
+</body>
+</html>
